@@ -1,7 +1,12 @@
-docker-build-and-push:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    steps:
+name: Node.js CI/CD Pipeline
+on:
+ push:
+  branches:
+   -main    
+jobs:
+ build-and-test
+  runs-on:ubuntu-latest
+  steps:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Log in to DockerHub
@@ -19,6 +24,7 @@ docker-build-and-push:
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo-app:${{ github.sha }}
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo-app:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo-app:latestp:latest
+
 
 
 
