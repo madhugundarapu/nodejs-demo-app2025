@@ -30,7 +30,9 @@ jobs:
 
       - name: Run tests
         run: npm test
-
+      - name: Debug DockerHub username
+        run: echo "DockerHub username is '${{ secrets.DOCKERHUB_USERNAME }}'"
+        
   docker-build-and-push:
     needs: build-and-test
     runs-on: ubuntu-latest
@@ -52,3 +54,4 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo-app:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo-app:latest
+
