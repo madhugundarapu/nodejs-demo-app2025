@@ -6,8 +6,8 @@ app.get('/', (req, res) => {
   res.send('Hello from the Docker container!');
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
 
-module.exports = app;
+module.exports = server; // Export the server instance instead of the app

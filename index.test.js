@@ -1,10 +1,16 @@
 const request = require('supertest');
-const app = require('./index');
+const server = require('./index'); // Import the server instance
 
 describe('GET /', () => {
   it('should return "Hello from the Docker container!"', async () => {
-    const res = await request(app).get('/');
+    const res = await request(server).get('/');
     expect(res.statusCode).toBe(200);
     expect(res.text).toBe('Hello from the Docker container!');
+  });
+});
+
+afterAll(done => {
+  server.close(() => {
+    done();
   });
 });
